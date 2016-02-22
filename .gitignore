@@ -1,0 +1,5 @@
+config.php
+.htaccess
+*~
+*.save
+*.bak
