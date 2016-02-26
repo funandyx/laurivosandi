@@ -31,7 +31,7 @@ $row = $results->fetch_assoc();
   <input type="submit" value="Add to cart"/>
 </form>
 
-<? include "footer.php" ?>
+<?php include "footer.php" ?>
 
 
 

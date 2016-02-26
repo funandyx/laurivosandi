@@ -1,5 +1,35 @@
 /* Apply font family to paragraphs */
 
-p, ul, li, h1, h2, h {
-  font-family: sans;
+p, ul, li, h1, h2, h, a {
+    /* Roboto font works only if the font CSS is included from Google */
+    font-family: "Roboto", Verdana, Arial, sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    padding: 0 1em;
+    background-color: #aabbff;
+}
+
+#content, footer { /* This expects id="content" ;) */
+    margin: 0 auto;
+    padding: 0 1em;
+    max-width: 40em;
+    border: 1px solid #888;
+    background-color: white;
+}
+
+footer {
+    color: #fff;
+    background-color: #222;
+}
+
+img { /* This will look ugly tho! */
+    width: 800px;
+    height: 100px;
 }

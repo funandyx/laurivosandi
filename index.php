@@ -12,7 +12,10 @@ if (!array_key_exists("timestamp", $_SESSION)) {
 }
 
 ?>
+
 <h1>Honest Lauri's webshop</h1>
+
+<p><a href="cart.php">Go to shopping cart</a>.</p>
 
 <p>NSA is monitoring you since <?=$_SESSION["timestamp"];?></p>
 <p>If you want any of these just call me ;)</p>
@@ -33,7 +36,7 @@ while ($row = $results->fetch_assoc()) {
 $conn->close();
 ?>
 </ul>
-<? include "footer.php" ?>
+<?php include "footer.php" ?>
 
 
 
