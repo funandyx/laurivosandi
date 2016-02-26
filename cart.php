@@ -2,9 +2,7 @@
 require_once "config.php";
 include "header.php"; // This includes <html><head></head><body>
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error)
-  die("Connection to database failed:" .
-    $conn->connect_error);
+$conn or die("Database connection failed:" . $conn->error);
 $conn->query("set names utf8"); // Support umlaut characters
 
 $product_id = intval($_POST["id"]);
@@ -24,15 +22,18 @@ if (array_key_exists($product_id, $_SESSION["cart"])) {
 $results = $conn->query(
 "SELECT id,name,price FROM lauri_products;");
 
+$results or die("Database query failed:" . $conn->error);
+
 while ($row = $results->fetch_assoc()) {
-  if (array_key_exists($row['id'], $_SESSION["cart"])) {
+  $product_id = $row['id'];
+  if (array_key_exists($product_id, $_SESSION["cart"])) {
+    $count = $_SESSION["cart"][];
     ?>
       <li>
-        <?=$_SESSION["cart"][$row['id']];?> items of
-        <a href="description.php?id=<?=$row['id']?>">
-          <?=$row['name']?></a>
-
-          <?=$row['price']?>EUR
+        <?=$count;?> items of
+        <a href="description.php?id=<?=$product_id;?>">
+          <?=$row['name'];?></a>
+          <?=$row['price'];?>EUR totals in <?= $row['price'] * $count; ?> EUR
       </li>
     <?php
   }
