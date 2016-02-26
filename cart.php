@@ -18,6 +18,27 @@ if (array_key_exists($product_id, $_SESSION["cart"])) {
 
 <h2>Products in shopping cart</h2>
 <p>
-<?php var_dump($_SESSION["cart"]); ?>
+
+<ul>
+<?php
+$results = $conn->query(
+"SELECT id,name,price FROM lauri_products;");
+
+while ($row = $results->fetch_assoc()) {
+  if (array_key_exists($row['id'], $_SESSION["cart"])) {
+    ?>
+      <li>
+        <?=$_SESSION["cart"][$row['id']];?> items of
+        <a href="description.php?id=<?=$row['id']?>">
+          <?=$row['name']?></a>
+
+          <?=$row['price']?>EUR
+      </li>
+    <?php
+  }
+}
+$conn->close();
+?>
+</ul>
 
 <?php include "footer.php" ?>
