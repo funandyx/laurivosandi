@@ -27,6 +27,7 @@ $row = $results->fetch_assoc();
 
 <form method="post" action="cart.php">
   <input type="hidden" name="id" value="<?=$_GET["id"];?>"/>
+  <input type="hidden" name="count" value="1"/>
   <input type="submit" value="Add to cart"/>
 </form>
 

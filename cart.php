@@ -9,12 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // We are adding something to the cart
     $product_id = intval($_POST["id"]);
     if (array_key_exists($product_id, $_SESSION["cart"])) {
-        $_SESSION["cart"][$product_id] += 1;
+        $_SESSION["cart"][$product_id] += intval($_POST["count"]);
     } else {
-        $_SESSION["cart"][$product_id] = 1;
+        $_SESSION["cart"][$product_id] = intval($_POST["count"]);
     }
-} else {
-    // We are just checking out what we have in the cart
 }
 
 ?>
@@ -39,8 +37,9 @@ while ($row = $results->fetch_assoc()) {
         <a href="description.php?id=<?=$product_id;?>">
           <?=$row['name'];?></a>
           <?=$row['price'];?>EUR totals in <?= $row['price'] * $count; ?> EUR
-        <form method="delete">
+        <form method="post">
           <input type="hidden" name="id" value="<?=$product_id;?>"/>
+          <input type="hidden" name="count" value="-1"/>
           <input type="submit" value="Remove"/>
         </form>
       </li>
