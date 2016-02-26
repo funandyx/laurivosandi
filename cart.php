@@ -6,12 +6,16 @@ $conn or die("Database connection failed:" . $conn->error);
 $conn->query("set names utf8"); // Support umlaut characters
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // We are adding something to the cart
+    // We are updating the cart contents
     $product_id = intval($_POST["id"]);
     if (array_key_exists($product_id, $_SESSION["cart"])) {
         $_SESSION["cart"][$product_id] += intval($_POST["count"]);
     } else {
         $_SESSION["cart"][$product_id] = intval($_POST["count"]);
+    }
+
+    if ($_SESSION["cart"][$product_id] <= 0) {
+        unset($_SESSION["cart"][$product_id]);
     }
 }
 
@@ -51,3 +55,9 @@ $conn->close();
 </ul>
 
 <?php include "footer.php" ?>
+
+
+
+
+
+
