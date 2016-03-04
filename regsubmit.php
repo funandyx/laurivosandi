@@ -20,7 +20,11 @@ $statement = $conn->prepare(
     `company`,
     `country`,
     `address`)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+# whenever you get "call to a member function ... on a non-object" this means something
+# is failing **before** that line so you have to manually check for errors like this:
+if (!$statement) die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
 
 $statement->bind_param("sssssssssss",
     $_POST["email"],
@@ -35,6 +39,16 @@ $statement->bind_param("sssssssssss",
     $_POST["country"],
     $_POST["address"]);
 
-$statement->execute() || die("Execute failed: (" . $statement->errno . ") " . $statement->error);
-
+if ($statement->execute()) {
+    echo "Registration was successful! <a href=\"index.php\">Back to main page</a>";
+} else {
+    if ($statement->errno == 1062) {
+       // This will result in 200 OK
+       echo "This e-mail is already registered";
+    } else {
+       // This will result in 500 Internal server error
+       die("Execute failed: (" .
+           $statement->errno . ") " . $statement->error);
+    }
+}
 ?>

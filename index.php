@@ -15,7 +15,7 @@ if (!array_key_exists("timestamp", $_SESSION)) {
 
 <h1>Honest Lauri's webshop</h1>
 
-<p><a href="cart.php">Go to shopping cart</a>.</p>
+<p><a href="registration.php">Sign up!</a>. <a href="cart.php">Go to shopping cart</a>.</p>
 
 <p>NSA is monitoring you since <?=$_SESSION["timestamp"];?></p>
 <p>If you want any of these just call me ;)</p>
