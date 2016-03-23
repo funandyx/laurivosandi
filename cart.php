@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <h2>Products in shopping cart</h2>
 
 <a href="index.php">Back to product listing</a>
+<a href="placeorder.php">Place order</a>
+
 <p>
 
 <ul>
@@ -55,6 +57,10 @@ while ($row = $results->fetch_assoc()) {
 $conn->close();
 ?>
 </ul>
+
+
+
+
 
 <?php include "footer.php" ?>
 
